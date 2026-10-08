@@ -1,122 +1,129 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+const GITHUB = 'https://github.com/JohnLorena22'
+const EMAIL = 'johnbrianlorena79@gmail.com'
+
+// Tip: replace each link with the project's own GitHub or live URL.
+const projects = [
+  {
+    name: 'Task-weaver',
+    description:
+      'A task manager for adding, organizing, and finishing your to-dos in one place.',
+    link: GITHUB,
+  },
+  {
+    name: 'Computer cafe shop',
+    description:
+      'A shop project for managing a computer cafe: its services, sessions, and sales.',
+    link: GITHUB,
+  },
+  {
+    name: 'Simple CRUD',
+    description:
+      'A small app that creates, reads, updates, and deletes records. The foundation for everything else I build.',
+    link: GITHUB,
+  },
+]
+
+const skills = [
+  'React',
+  'JavaScript',
+  'Vite',
+  'HTML & CSS',
+  'Java',
+  'Git & GitHub',
+  'Vercel',
+]
+
+const initialTasks = [
+  { id: 1, text: 'Build Task-weaver', done: true },
+  { id: 2, text: 'Build the Computer cafe shop', done: true },
+  { id: 3, text: 'Deploy my portfolio', done: true },
+  { id: 4, text: 'Get better at Java', done: false },
+]
+
+export default function App() {
+  const [tasks, setTasks] = useState(initialTasks)
+
+  const toggle = (id) =>
+    setTasks((current) =>
+      current.map((t) => (t.id === id ? { ...t, done: !t.done } : t))
+    )
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="page">
+      <header className="hero">
+        <h1>Hi, I'm John Lorena.</h1>
+        <p className="lead">
+          I build small web apps with React and JavaScript, and I'm growing my
+          skills in Java.
+        </p>
+
+        <div className="panel">
+          <h2 className="panel-title">What I'm working on</h2>
+          <ul className="tasks">
+            {tasks.map((task) => (
+              <li key={task.id}>
+                <label className={task.done ? 'task done' : 'task'}>
+                  <input
+                    type="checkbox"
+                    checked={task.done}
+                    onChange={() => toggle(task.id)}
+                  />
+                  <span>{task.text}</span>
+                </label>
+              </li>
+            ))}
+          </ul>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
+      </header>
+
+      <main>
+        <section>
+          <h2>Projects</h2>
+          <ul className="projects">
+            {projects.map((p) => (
+              <li key={p.name}>
+                <a href={p.link} target="_blank" rel="noreferrer">
+                  <h3>{p.name}</h3>
+                  <p>{p.description}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section>
+          <h2>Skills</h2>
+          <ul className="chips">
+            {skills.map((s) => (
+              <li key={s}>{s}</li>
+            ))}
+          </ul>
+        </section>
+
+        <section>
+          <h2>Contact</h2>
+          <p className="contact-text">
+            Have a project or an opportunity in mind? Send me an email.
           </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
+          <ul className="contact">
             <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
+              <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
             </li>
             <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
+              <a href={GITHUB} target="_blank" rel="noreferrer">
+                github.com/JohnLorena22
               </a>
             </li>
           </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        </section>
+      </main>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+      <footer>
+        <p>© {new Date().getFullYear()} John Lorena</p>
+      </footer>
+    </div>
   )
 }
-
-export default App
