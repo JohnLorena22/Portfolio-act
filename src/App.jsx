@@ -321,7 +321,7 @@ function App() {
               </a>
 
               <a
-                href="mailto:your-email@example.com"
+                href="mailto:johnbrianlorena79@gmail.com"
                 className="outline-light-button"
               >
                 Email Me
@@ -336,8 +336,6 @@ function App() {
         <p>
           © {new Date().getFullYear()} John Lorena
         </p>
-
-        <p>Built with React + Vite</p>
       </footer>
     </div>
   );
